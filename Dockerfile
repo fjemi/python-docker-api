@@ -1,9 +1,9 @@
-FROM ubuntu:latest
-MAINTAINER Femi Jemilohun "olufemi.jemilohun@gmail.com"
-RUN apt-get update -y
-RUN apt-get install -y python-pip python-dev build-essential
-COPY . /app
-WORKDIR /app
-RUN pip install -r requirements.txt
-ENTRYPOINT ["python"]
-CMD ["api.py"] 
+FROM python:3.7
+
+RUN pip install fastapi uvicorn
+
+EXPOSE 80
+
+COPY ./app /app
+
+CMD ["uvicorn", "app.app:app", "--host", "0.0.0.0", "--port", "80"]

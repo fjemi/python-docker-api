@@ -8,8 +8,8 @@ import uvicorn
 
 app = FastAPI()
 
-@app.get('/ping/')
-def ping():
+@app.get('/')
+async def ping():
   '''Ping the API
   '''
   return {'ping': 'pong'}
