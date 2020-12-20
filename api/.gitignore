@@ -1,5 +1,5 @@
 ### ignore folders
-ignore/*
+ignore/
 
 ### python
 ### https://github.com/github/gitignore/blob/master/Python.gitignore
