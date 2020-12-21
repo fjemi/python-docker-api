@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 
 import sys
-# allow imports from directory
+# add module directory to system path for importing
 sys.path.insert(0,'../api/app')
-
-from fastapi.testclient import TestClient
 from app import app
+from fastapi.testclient import TestClient
 from fastapi import HTTPException
 
 
