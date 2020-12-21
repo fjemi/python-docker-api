@@ -13,7 +13,8 @@ API_DIR = split(realpath(__file__))[0]
 class Payload(BaseModel):
   '''
   # Request Payload Model
-  - **payload**: contains the route to call, data to pass, and errors
+  - **route**: route in `/routes` 
+  - **data**: data passed to function loaded 
   '''
   route: str = 'ping'
   data: Any = {}
@@ -31,8 +32,10 @@ async def root() -> dict:
 @app.post('/api')
 async def api(payload: Payload) -> dict:
   '''
+  # API
+  - **route**: each request must have a route
+  - **data**: optional
   '''
-  print(payload)
   # check if the payload contains a route
   if 'route' not in payload.dict().keys():
     return HTTPException
