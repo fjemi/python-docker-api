@@ -25,14 +25,18 @@ app = FastAPI()
 
 
 @app.get('/api')
-async def root() -> dict:
-  '''Ping the API'''
+async def api() -> dict:
+  '''
+  # Ping the API
+  ---
+  '''
   return {'ping': 'pong'}
 
 @app.post('/api')
 async def api(payload: Payload) -> dict:
   '''
-  # API
+  # Payload
+  ___
   - **route**: each request must have a route
   - **data**: optional
   '''

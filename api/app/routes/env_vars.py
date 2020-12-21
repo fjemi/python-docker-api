@@ -3,7 +3,7 @@
 from os import environ
 
 # TODO  add login and token
-def env_vars() -> dict:
+def env_vars(data: None) -> dict:
   ''' Returns a JSON containg system enviroment variables
   '''
   return environ
