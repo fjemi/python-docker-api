@@ -1,4 +1,4 @@
-#! /usr/bin/python3
+#!/usr/bin/env python3
 
 from os.path import split, realpath
 from importlib.machinery import SourceFileLoader
@@ -68,3 +68,7 @@ async def api(payload: Payload) -> dict:
     return func(payload.data)
   except Exception as error:
     return {'error': repr(error)}
+
+if __name__ == "__main__":
+  import uvicorn
+  uvicorn.run(app, host="0.0.0.0", port=8000)
