@@ -23,24 +23,29 @@ def create_gitignore(child_dir: 'str') -> 'None':
   if not gitignore_files:
     return None
   
-  new_gitignore = ''
+  text = ''
   store = []
   
   for file in gitignore_files:
     file_path = f'{THIS_DIR}/{file}'
     if file_path.endswith(EXT) == True:
-      with open(file_path, 'r') as f:        
+      with open(file_path, 'r') as f:     
         temp = f.read()
-        new_gitignore = new_gitignore + temp + '\n'
+        text = text + temp + '\n'
         store.append({'file': file})
   
-  if len(new_gitignore) == '':
+  if len(text) == '':
     return None
   
   with open(f'{parent_dir}/.gitignore', 'w') as f:
-    f.write(new_gitignore)
+    # delete file contents
+    f.truncate(0)
+    # write text to the new file
+    f.write(text)
   
-  print(store)
+  print({
+    'directory': parent_dir,
+    'consolidated': store})
   return None
 
 
