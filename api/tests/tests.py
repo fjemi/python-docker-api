@@ -6,7 +6,7 @@ import pytest
 from typing import List
 
 # set tests directory
-TESTS_DIR = dirname(abspath(__file__)) + '/tests/'
+TESTS_DIR = dirname(abspath(__file__)) + '/'
 
 def execute_pytests(paths: List[str]) -> None:
   ''' Allows running pytests in subdirectories
