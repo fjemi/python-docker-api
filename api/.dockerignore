@@ -1,5 +1,6 @@
 # ignore folders
 ignore/
+tests/
 
 # python
 __pycache__
