@@ -1,4 +1,4 @@
-# production
+# build stage
 FROM python:3.8.3-slim-buster as build
 
 # set environment varibles
@@ -13,10 +13,10 @@ RUN cd /tmp && pipenv lock --requirements > requirements.txt
 RUN pip install -r /tmp/requirements.txt
 COPY ./app /app
 
-# build stage
+# production stage
 # expose image port
 EXPOSE 80
 # set enviroment variable
 ENV PYTHONPATH="/app/routes/"
 # spin up web server
-CMD ["sh", "-c", "uvicorn app.app:app --reload --host 0.0.0.0 --port 80"]
+CMD ["sh", "-c", "python app/app.py"]

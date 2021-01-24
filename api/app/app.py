@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 
+from dataclasses import dataclass
 from os.path import split, realpath
 from importlib.machinery import SourceFileLoader
 from typing import Dict, Any, List, Optional
 from pydantic import BaseModel
 from fastapi import FastAPI, Query, status, HTTPException
 
+from utils.set_env import set_env
+
 # set app root directory
 API_DIR = split(realpath(__file__))[0]
-
+ENV = set_env()
 
 class Payload(BaseModel):
   '''
@@ -20,8 +23,10 @@ class Payload(BaseModel):
   data: Any = {}
   
 
-
-app = FastAPI()
+app = FastAPI(
+  title=ENV.name,
+  version=ENV.tag
+)
 
 
 @app.get('/')
@@ -30,7 +35,13 @@ async def root() -> dict:
   # Ping the API
   ---
   '''
-  return {'ping': 'pong'}
+  # TODO: use secure protocol for docs url
+  swagger_docs_url = f'http://{ENV.host}:{ENV.port}/docs'
+  redoc_docs_url = None
+  return {
+    'name': ENV.name, 
+    'swagger_docs': swagger_docs_url,
+    'redoc_docs': redoc_docs_url}
 
 @app.get('/api/{route}/')
 async def api(route: str, q: Optional[List[str]] = Query(None)) -> dict:
@@ -69,6 +80,12 @@ async def api(payload: Payload) -> dict:
   except Exception as error:
     return {'error': repr(error)}
 
-if __name__ == "__main__":
+
+def run_server():
+  ''''''
   import uvicorn
-  uvicorn.run(app, host="0.0.0.0", port=8000)
+  uvicorn.run('app:app', host=ENV.host, port=int(ENV.port), reload=ENV.debug)
+
+
+if __name__ == "__main__":
+  run_server()
