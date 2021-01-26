@@ -50,4 +50,4 @@ def create_gitignore(child_dir: 'str') -> 'None':
 
 
 if __name__ == '__main__':
-  create_gitignore('api')
+  create_gitignore('')

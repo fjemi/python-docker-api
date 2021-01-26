@@ -3,25 +3,24 @@ version: '3.8'
 services:
   api:
     build: 
-      context: ./api
+      context: ./
+      dockerfile: ./Dockerfile
     env_file:
       - .env
     environment:
-      - IMAGE=${API_NAME}:${TAG}
-      - HOST=${HOST}
-      - PORT=${PORT}
-      - ENV=${ENV}
-      - DEBUG=${DEBUG}
-      - SERVER_RELOAD=${SERVER_RELOAD}
-      - DEPLOYMENT_CMD=${DEPLOYMENT_CMD}
+      - IMAGE=${NAME}:${TAG}
     volumes:
-      - ./api/app:/app
+      - ./app/:/app
     ports:
       - ${PORT}:${PORT}
     restart: always
     networks: 
       - frontend
       - backend
+
+volumes:
+  app: 
+    driver: local
       
 networks:
   frontend:
