@@ -72,8 +72,9 @@ async def api(payload: Payload) -> dict:
   try:
     # load routes defined in `/routes` folder
     route = SourceFileLoader(payload.route,
-      f'{API_DIR}/routes/post/{payload.route}.py'
+      f'{API_DIR}/routes/{payload.route}.py'
     ).load_module()
+    
     # load function from route
     func = getattr(route, payload.route)
     return func(payload.data)
