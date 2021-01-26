@@ -41,7 +41,7 @@ def set_env() -> 'Env':
   default_env_vars = list(environ.keys())
   
   for var in var_names:
-    var_name = f'{var.upper()}'
+    var_name = f'API_{var.upper()}'
     try:
       # add var to store
       store[var] = environ[var_name]

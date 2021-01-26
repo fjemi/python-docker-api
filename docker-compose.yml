@@ -8,11 +8,11 @@ services:
     env_file:
       - .env
     environment:
-      - IMAGE=${NAME}:${TAG}
+      - IMAGE=${API_NAME}:${API_TAG}
     volumes:
       - ./app/:/app
     ports:
-      - ${PORT}:${PORT}
+      - ${API_PORT}:${API_PORT}
     restart: always
     networks: 
       - frontend

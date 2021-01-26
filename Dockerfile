@@ -1,7 +1,9 @@
 # build
 FROM python:3.8.3-alpine as build
 
-# set enviroment variable
+# set environment varibles
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 ENV PYTHONPATH="/app/routes/"
 
 WORKDIR /
@@ -18,6 +20,7 @@ RUN ["sh", "-c", "pipenv install --system"]
 # production
 # expose image port
 EXPOSE 80
+
 # run server
 CMD ["sh", "-c", "pipenv run python app.py"]
 #CMD ["sh", "-c", "ls app -a;"]
